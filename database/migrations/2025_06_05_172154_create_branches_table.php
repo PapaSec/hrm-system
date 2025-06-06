@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banks', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Amalgamated Banks of South Africa
-            $table->string('short_name'); // ABSA Bank
+            $table->foreignId('bank_id'); // ID for ABSA
+            $table->string('name'); // Joburg Branch, Roodepoort West Gate
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('sort_code');
+            $table->timestamps();
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banks');
+        Schema::dropIfExists('branches');
     }
 };
